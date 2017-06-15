@@ -6,11 +6,13 @@ import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by joanmi on 15/6/17.
  */
-public class UserController implements HttpHandler {
+public class UserController extends Controller implements HttpHandler {
 
     protected IUsers userManager;
 
@@ -24,11 +26,13 @@ public class UserController implements HttpHandler {
 
     @Override
     public void handle(HttpExchange t) throws IOException {
-        String response = "This is the response";
-        t.sendResponseHeaders(200, response.length());
-        OutputStream os = t.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
+        this.ProcessRequest(t);
+    }
+    protected ResultContext GetRequest(final Map<String, List<String>> params)
+    {
+        ResultContext res = new ResultContext(200,"the response");
+
+        return res;
     }
 
 }

@@ -11,8 +11,9 @@ import java.net.InetSocketAddress;
  */
 public class main {
 
-    protected final static int PORT = 8000;
-    protected final static int BACKLOG = 0;
+    private final static String HOSTNAME = "localhost";
+    private final static int PORT = 8000;
+    private final static int BACKLOG = 1;
 
     public static void main(String args[])
     {
@@ -22,7 +23,7 @@ public class main {
 
             IUsers managerOfUsers = new Users();
 
-            HttpServer server = HttpServer.create(new InetSocketAddress(PORT), BACKLOG );
+            HttpServer server = HttpServer.create(new InetSocketAddress( HOSTNAME,PORT), BACKLOG );
             server.createContext(UserController.URL_PATH, new UserController(managerOfUsers )); //Dependency Injection
             server.createContext(LoginController.URL_PATH, new LoginController(managerOfUsers )); //Dependency Injection
 
