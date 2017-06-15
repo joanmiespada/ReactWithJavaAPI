@@ -47,6 +47,7 @@ public abstract class Controller {
             final String requestMethod = t.getRequestMethod().toUpperCase();
             ResultContext result;
 
+            headers.set(HEADER_CONTENT_TYPE, CHARSET.toString());
             switch (requestMethod) {
                 case ApiDefinitions.METHOD_GET:
                     final Map<String, List<String>> requestParameters = ApiDefinitions.getRequestParameters(t.getRequestURI());

@@ -4,7 +4,6 @@ package com.Schibsted.api.Controllers;
  * Created by joanmi on 15/6/17.
  */
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.io.*;
 import java.net.URI;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public final class ApiDefinitions {
 
