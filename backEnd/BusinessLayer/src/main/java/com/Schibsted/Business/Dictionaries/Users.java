@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by joanmi on 15/6/17.
  */
-public class Users {
+public class Users implements IUsers {
 
     public List<User> GetAllUsers()
     {

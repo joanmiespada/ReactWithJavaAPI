@@ -1,21 +1,37 @@
-import com.Schibsted.Business.Dictionaries.Users;
-import com.Schibsted.Business.Entities.User;
+import com.Schibsted.Business.Dictionaries.*;
+import com.Schibsted.api.Controllers.LoginController;
+import com.Schibsted.api.Controllers.UserController;
+import com.sun.net.httpserver.HttpServer;
 
-import java.util.List;
+import java.io.IOException;
+import java.net.InetSocketAddress;
 
 /**
  * Created by joanmi on 15/6/17.
  */
 public class main {
 
+    protected final static int PORT = 8000;
+    protected final static int BACKLOG = 0;
+
     public static void main(String args[])
     {
 
-        System.out.println("sdfsdfdf");
+        try {
+            System.out.println("Working on: " + PORT);
 
-        Users managerOfUsers = new Users();
+            IUsers managerOfUsers = new Users();
 
-        List<User> res =  managerOfUsers.GetAllUsers();
+            HttpServer server = HttpServer.create(new InetSocketAddress(PORT), BACKLOG );
+            server.createContext(UserController.URL_PATH, new UserController(managerOfUsers )); //Dependency Injection
+            server.createContext(LoginController.URL_PATH, new LoginController(managerOfUsers )); //Dependency Injection
+
+            server.start();
+
+        }catch (IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
 
 
 
