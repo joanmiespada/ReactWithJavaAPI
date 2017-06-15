@@ -12,7 +12,8 @@ public class Users implements IUsers {
 
     public List<User> GetAllUsers()
     {
-        User foo = new User("foo");
+        User foo = new User();
+        foo.setName("foo");
         ArrayList<User> result = new ArrayList<>();
         result.add(foo);
 
