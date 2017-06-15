@@ -17,6 +17,10 @@ import java.util.Map;
 public class LoginController extends Controller implements HttpHandler {
 
     public static final String URL_PATH="/login";
+
+    public static final String USER="user";
+    public static final String PASS="pass";
+
     protected IUsers userManager;
 
     public LoginController(IUsers users)
@@ -32,9 +36,15 @@ public class LoginController extends Controller implements HttpHandler {
 
     protected ResultContext GetRequest(final Map<String, List<String>> params)
     {
-        ResultContext res = new ResultContext(200, "login");
+        String user = params.get(USER).get(0);
+        String pwd  = params.get(PASS).get(0);
+        ResultContext res = new ResultContext(200, "login: "+ user + " pwd: " + pwd);
 
         return res;
     }
 
+    protected ResultContext PostRequest(final String payload)
+    {
+       return new ResultContext(200,"ok: " + payload);
+    }
 }

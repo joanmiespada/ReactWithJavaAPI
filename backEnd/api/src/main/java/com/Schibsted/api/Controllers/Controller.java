@@ -2,8 +2,10 @@ package com.Schibsted.api.Controllers;
 
 
 import com.sun.net.httpserver.Headers;
+import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.tools.javac.util.Pair;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -27,21 +29,36 @@ public abstract class Controller {
     }
 
     //template design pattern
-    protected abstract ResultContext GetRequest(final Map<String, List<String>> params );
+    protected ResultContext GetRequest(final Map<String, List<String>> urlparams ) { throw new NotImplementedException(); }
+    protected ResultContext PostRequest(final String payload ) { throw new  NotImplementedException(); }
+
+    protected void WriteResponse(HttpExchange t, ResultContext result) throws IOException
+    {
+        t.sendResponseHeaders(result.value, result.message.length());
+        OutputStream os = t.getResponseBody();
+        os.write(result.message.getBytes());
+        os.close();
+    }
 
     protected void ProcessRequest(HttpExchange t) throws IOException
     {
         try {
             final Headers headers = t.getResponseHeaders();
             final String requestMethod = t.getRequestMethod().toUpperCase();
+            ResultContext result;
+
             switch (requestMethod) {
                 case ApiDefinitions.METHOD_GET:
                     final Map<String, List<String>> requestParameters = ApiDefinitions.getRequestParameters(t.getRequestURI());
-                    ResultContext result= this.GetRequest(requestParameters);
-                    t.sendResponseHeaders(result.value, result.message.length());
-                    OutputStream os = t.getResponseBody();
-                    os.write(result.message.getBytes());
-                    os.close();
+                    result= this.GetRequest(requestParameters);
+                    WriteResponse(t,result);
+
+                    break;
+                case METHOD_POST:
+                    final String payload = ApiDefinitions.postRequestPayload(t.getRequestBody());
+                    result= this.PostRequest(payload);
+                    WriteResponse(t,result);
+
                     break;
                 case METHOD_OPTIONS:
                     headers.set(HEADER_ALLOW, ALLOWED_METHODS);
@@ -53,11 +70,6 @@ public abstract class Controller {
                     break;
             }
 
-        /*String response = "This is the response";
-        t.sendResponseHeaders(200, response.length());
-        OutputStream os = t.getResponseBody();
-        os.write(response.getBytes());
-        os.close();*/
 
         }finally {
             t.close();
