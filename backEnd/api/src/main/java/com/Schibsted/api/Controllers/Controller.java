@@ -47,7 +47,7 @@ public abstract class Controller {
             final String requestMethod = t.getRequestMethod().toUpperCase();
             ResultContext result;
 
-            headers.set(HEADER_CONTENT_TYPE, CHARSET.toString());
+            //headers.set(HEADER_CONTENT_TYPE, CHARSET.toString());
             switch (requestMethod) {
                 case ApiDefinitions.METHOD_GET:
                     final Map<String, List<String>> requestParameters = ApiDefinitions.getRequestParameters(t.getRequestURI());
@@ -77,7 +77,15 @@ public abstract class Controller {
         }
 
     }
+    /*
 
+     final String responseBody = "['hello world!']";
+                        headers.set(HEADER_CONTENT_TYPE, String.format("application/json; charset=%s", CHARSET));
+                        final byte[] rawResponseBody = responseBody.getBytes(CHARSET);
+                        he.sendResponseHeaders(STATUS_OK, rawResponseBody.length);
+                        he.getResponseBody().write(rawResponseBody);
+
+     */
 
 
 }
