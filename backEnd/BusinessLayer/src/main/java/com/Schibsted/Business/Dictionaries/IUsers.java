@@ -9,10 +9,10 @@ import java.util.List;
  */
 public interface IUsers
 {
-    List<User> GetAllUsers();
-    void Add(User user);
+    List<User> GetAllUsers() throws Exception;
+    /*void Add(User user);
     void Delete(int id);
     void Update(int id, User user);
     User FindById(int id);
-    List<User> FindByName(String name);
+    List<User> FindByName(String name);*/
 }
