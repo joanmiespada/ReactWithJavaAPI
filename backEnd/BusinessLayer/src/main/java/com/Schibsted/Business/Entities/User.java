@@ -12,8 +12,16 @@ import lombok.ToString;
 public class User {
 
     @Getter @Setter private String Name;
-    @Getter @Setter private Integer  Id;
+    @Getter @Setter private Long Id;
     @Getter @Setter private String Password;
-    @Getter @Setter private String Roles; //will be implemented as ACL -> https://en.wikipedia.org/wiki/Access_control_list
+    @Getter @Setter private String Roles;
 
+    public User(){}
+    public User(User copy)
+    {
+        this.Name=copy.Name;
+        this.Id = copy.Id;
+        this.Password=copy.Password;
+        this.Roles=copy.Roles;
+    }
 }

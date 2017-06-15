@@ -1,6 +1,7 @@
 package com.Schibsted.Business.Dictionaries;
 
 import com.Schibsted.Business.Entities.User;
+import com.sun.tools.javac.util.Pair;
 
 import java.util.List;
 
@@ -9,10 +10,12 @@ import java.util.List;
  */
 public interface IUsers
 {
-    List<User> GetAllUsers() throws Exception;
-    /*void Add(User user);
-    void Delete(int id);
-    void Update(int id, User user);
-    User FindById(int id);
-    List<User> FindByName(String name);*/
+    Pair< List<User>, Long> GetAllUsers(int page, int pageSize) throws Exception;
+    User Add(User user) throws Exception;
+    Boolean Delete(long id) throws  Exception;
+    void Update(long id, String name, String Roles)throws  Exception;
+    User FindById(long id)throws  Exception;
+    List<User> FindByName(String name, int page ,int pageSize)throws  Exception;
+    User FindByNameAndPassword(String name, String passw)throws  Exception;
+
 }
