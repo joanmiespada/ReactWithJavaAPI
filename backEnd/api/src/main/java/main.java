@@ -7,13 +7,12 @@ import com.Schibsted.api.Controllers.LoginController;
 import com.Schibsted.api.Controllers.UserController;
 import com.sun.net.httpserver.HttpServer;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 
 /**
  * Created by joanmi on 15/6/17.
  */
-public class main {
+public class Main {
 
     private final static String HOSTNAME = "localhost";
     private final static int PORT = 8000;

@@ -26,10 +26,6 @@ public class UserController extends Controller implements HttpHandler {
     public static final String METHOD_DELETE="/delete";
 
     public static final String DELETE_ID_USER="user_to_delete";
-    public static final String USER_NAME="user_name";
-    public static final String USER_PASS="user_passw";
-    public static final String USER_ROLE="user_role";
-    public static final String USER_ID="user_id";
 
     public UserController(IUsers users)
     {
