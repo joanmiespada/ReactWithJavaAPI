@@ -1,6 +1,7 @@
 package com.Schibsted.api.Controllers;
 
 import com.Schibsted.Business.Dictionaries.*;
+import com.Schibsted.Business.Entities.User;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -37,11 +38,13 @@ public class LoginController extends Controller implements HttpHandler {
         return params.get(USER).get(0);
     }
 
-    protected ResultContext GetRequest(final Map<String, List<String>> params, final String uri)
+    protected ResultContext GetRequest(final Map<String, List<String>> params, final String uri) throws Exception
     {
         String user = this.GetUserParam(params);
         String pwd  = params.get(PASS).get(0);
-        ResultContext res = new ResultContext(ApiDefinitions.STATUS_OK, "login: "+ user + " pwd: " + pwd);
+
+        User us = this.userManager.FindByNameAndPassword(user,pwd);
+        ResultContext res = new ResultContext(ApiDefinitions.STATUS_OK, us.getRoles() );
 
         return res;
     }
