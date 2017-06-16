@@ -32,9 +32,14 @@ public class LoginController extends Controller implements HttpHandler {
         this.ProcessRequest(t);
     }
 
-    protected ResultContext GetRequest(final Map<String, List<String>> params,String uri)
+    public static String GetUserParam(final Map<String, List<String>> params)
     {
-        String user = params.get(USER).get(0);
+        return params.get(USER).get(0);
+    }
+
+    protected ResultContext GetRequest(final Map<String, List<String>> params, final String uri)
+    {
+        String user = this.GetUserParam(params);
         String pwd  = params.get(PASS).get(0);
         ResultContext res = new ResultContext(ApiDefinitions.STATUS_OK, "login: "+ user + " pwd: " + pwd);
 

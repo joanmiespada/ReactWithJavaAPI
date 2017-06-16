@@ -1,6 +1,7 @@
 package com.Schibsted.api.Controllers;
 
 
+import com.Schibsted.Business.Exceptions.NotRoleAllowedException;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -23,6 +24,10 @@ public abstract class Controller {
         public ResultContext(int val,String text){
             this.value=val;
             this.message = text;
+        }
+        public ResultContext(int val){
+            this.value=val;
+            this.message = "";
         }
     }
 
@@ -68,7 +73,8 @@ public abstract class Controller {
                     t.sendResponseHeaders(STATUS_METHOD_NOT_ALLOWED, NO_RESPONSE_LENGTH);
                     break;
             }
-
+        }catch (NotRoleAllowedException ex){
+            t.sendResponseHeaders(STATUS_FORBIDDEN, NO_RESPONSE_LENGTH);
         }catch (Exception ex){
             t.sendResponseHeaders(INTERNAL_SERVER_ERROR, NO_RESPONSE_LENGTH);
 

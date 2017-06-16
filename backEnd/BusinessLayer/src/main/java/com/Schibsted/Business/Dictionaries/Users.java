@@ -16,7 +16,6 @@ import java.util.List;
 public class Users extends Dictionary implements IUsers {
 
 
-    @AllowRoles(roles="admin")
     public Pair< List<User>, Long> GetAllUsers(int page ,int pageSize ) throws Exception
     {
         List<User> result = new ArrayList<>();

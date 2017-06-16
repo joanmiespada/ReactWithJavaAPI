@@ -1,7 +1,7 @@
 import com.Schibsted.Business.Context.DataContext;
 import com.Schibsted.Business.Context.IDataContext;
-import com.Schibsted.Business.Dictionaries.IUsers;
-import com.Schibsted.Business.Dictionaries.Users;
+import com.Schibsted.Business.Service.IUsers;
+import com.Schibsted.Business.Service.Users;
 import com.Schibsted.Business.SeedData.SeedData;
 import com.Schibsted.api.Controllers.LoginController;
 import com.Schibsted.api.Controllers.UserController;

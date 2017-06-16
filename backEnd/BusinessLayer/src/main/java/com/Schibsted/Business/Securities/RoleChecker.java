@@ -1,20 +1,23 @@
 package com.Schibsted.Business.Securities;
 
 import com.Schibsted.Business.Entities.User;
+import com.Schibsted.Business.Exceptions.NotRoleAllowedException;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
 
 /**
  * Created by joanmi on 16/6/17.
  */
 
-
+//The best way is use it through Interception methods, for example, AOP Spring...
 public class RoleChecker {
 
-    public static boolean VerifyRole(User u, String roles)
+    public static boolean VerifyRole(User u, String roles) throws NotRoleAllowedException
     {
-        return u.getRoles().indexOf(roles) == 0 ? true: false;
+        boolean res;
+        res = u.getRoles().indexOf(roles) == 0 ? true : false;
+        if(!res)
+            throw new NotRoleAllowedException();
+        return res;
     }
 
 }
