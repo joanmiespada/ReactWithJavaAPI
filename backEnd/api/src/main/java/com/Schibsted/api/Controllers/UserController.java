@@ -50,17 +50,26 @@ public class UserController extends Controller implements HttpHandler {
         }
         if(uri.equals(URL_PATH+METHOD_GETALLUSERS)) {
             return this.GetAllUsers();
-        }else if(uri.equals(URL_PATH+METHOD_ADD)){
-            return this.Add(params);
         }else if(uri.equals(URL_PATH+METHOD_DELETE)){
             return this.Delete(params);
-        }else if(uri.equals(URL_PATH+METHOD_UPDATE)){
-            return this.Update(params);
         }else{
             return new ResultContext(ApiDefinitions.NOT_IMPLEMENTED,"");
         }
 
     }
+
+    protected ResultContext PostRequest(final String payload, String uri ) throws Exception {
+
+        if(uri.equals(URL_PATH+METHOD_ADD)){
+            return this.Add(payload);
+        }else if(uri.equals(URL_PATH+METHOD_UPDATE)){
+            return this.Update(payload);
+        }else{
+            return new ResultContext(ApiDefinitions.NOT_IMPLEMENTED,"");
+        }
+    }
+
+
     protected ResultContext Delete(final Map<String, List<String>> params) throws Exception
     {
         long currentIdUser = Long.parseLong(LoginController.GetUserParam(params));
@@ -71,34 +80,38 @@ public class UserController extends Controller implements HttpHandler {
         return new ResultContext(ApiDefinitions.STATUS_OK);
     }
 
-    protected ResultContext Add(final Map<String, List<String>> params) throws Exception
+    protected class Payloader
     {
-        long currentIdUser = Long.parseLong(LoginController.GetUserParam(params));
+        public String id;
+        public String name;
+        public String password;
+        public String roles;
+        public String currentiduser;
+    }
 
-        String user_name  = params.get(USER_NAME).get(0);
-        String user_pwd   = params.get(USER_PASS).get(0);
-        String user_role   = params.get(USER_ROLE).get(0);
+    protected ResultContext Add(String payload) throws Exception
+    {
+        Gson gson = new Gson();
+        Payloader data = gson.fromJson(payload, Payloader.class );
+        long currentIdUser = Long.parseLong(data.currentiduser);
 
         User us = new User();
-        us.setName(user_name);
-        us.setRoles(user_role);
-        us.setPassword(user_pwd);
+        us.setName(data.name);
+        us.setRoles(data.roles);
+        us.setPassword(data.password);
 
         this.userManager.Add(currentIdUser,us );
         return new ResultContext(ApiDefinitions.STATUS_OK);
     }
 
-    protected ResultContext Update(final Map<String, List<String>> params) throws Exception
+    protected ResultContext Update(String payload) throws Exception
     {
-        long currentIdUser = Long.parseLong(LoginController.GetUserParam(params));
+        Gson gson = new Gson();
+        Payloader data = gson.fromJson(payload, Payloader.class);
+        long currentIdUser = Long.parseLong(data.currentiduser);
+        long idusertoupdate = Long.parseLong(data.id);
 
-        String user_name  = params.get(USER_NAME).get(0);
-        String user_role   = params.get(USER_ROLE).get(0);
-        String user_id   = params.get(USER_ID).get(0);
-
-        long user_id2 = Long.parseLong(user_id);
-
-        this.userManager.Update(currentIdUser, user_id2, user_name, user_role);
+        this.userManager.Update(currentIdUser, idusertoupdate , data.name, data.roles);
 
         return new ResultContext(ApiDefinitions.STATUS_OK);
     }
