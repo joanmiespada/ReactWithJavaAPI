@@ -1,6 +1,6 @@
 package com.Schibsted.Business.Dictionaries;
 
-import com.Schibsted.Business.Context.IDataContext;
+import com.Schibsted.Business.Securities.*;
 import com.Schibsted.Business.Entities.User;
 import com.Schibsted.Business.Utils.CipherHelper;
 import com.sun.tools.javac.util.Pair;
@@ -16,6 +16,7 @@ import java.util.List;
 public class Users extends Dictionary implements IUsers {
 
 
+    @AllowRoles(roles="admin")
     public Pair< List<User>, Long> GetAllUsers(int page ,int pageSize ) throws Exception
     {
         List<User> result = new ArrayList<>();

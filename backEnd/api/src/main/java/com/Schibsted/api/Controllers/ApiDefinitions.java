@@ -24,6 +24,9 @@ public final class ApiDefinitions {
 
     public static final int STATUS_OK = 200;
     public static final int STATUS_METHOD_NOT_ALLOWED = 405;
+    public static final int INTERNAL_SERVER_ERROR = 500;
+    public static final int NOT_IMPLEMENTED= 501;
+
 
     public static final int NO_RESPONSE_LENGTH = -1;
 

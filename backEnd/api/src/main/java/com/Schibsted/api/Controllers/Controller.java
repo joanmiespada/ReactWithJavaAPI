@@ -2,9 +2,7 @@ package com.Schibsted.api.Controllers;
 
 
 import com.sun.net.httpserver.Headers;
-import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.tools.javac.util.Pair;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
@@ -21,7 +19,7 @@ public abstract class Controller {
     protected class ResultContext{
         public int value;
         public String message;
-        public ResultContext(){}
+        //public ResultContext(){}
         public ResultContext(int val,String text){
             this.value=val;
             this.message = text;
@@ -29,8 +27,8 @@ public abstract class Controller {
     }
 
     //template design pattern
-    protected ResultContext GetRequest(final Map<String, List<String>> urlparams ) { throw new NotImplementedException(); }
-    protected ResultContext PostRequest(final String payload ) { throw new  NotImplementedException(); }
+    protected ResultContext GetRequest(final Map<String, List<String>> urlparams, String uri ) throws Exception  { throw new NotImplementedException(); }
+    protected ResultContext PostRequest(final String payload, String uri ) throws Exception { throw new  NotImplementedException(); }
 
     protected void WriteResponse(HttpExchange t, ResultContext result) throws IOException
     {
@@ -51,14 +49,14 @@ public abstract class Controller {
             switch (requestMethod) {
                 case ApiDefinitions.METHOD_GET:
                     final Map<String, List<String>> requestParameters = ApiDefinitions.getRequestParameters(t.getRequestURI());
-                    result= this.GetRequest(requestParameters);
-                    WriteResponse(t,result);
+                    result = this.GetRequest(requestParameters, t.getRequestURI().toString());
+                    WriteResponse(t, result);
 
                     break;
                 case METHOD_POST:
                     final String payload = ApiDefinitions.postRequestPayload(t.getRequestBody());
-                    result= this.PostRequest(payload);
-                    WriteResponse(t,result);
+                    result = this.PostRequest(payload, t.getRequestURI().toString());
+                    WriteResponse(t, result);
 
                     break;
                 case METHOD_OPTIONS:
@@ -71,12 +69,15 @@ public abstract class Controller {
                     break;
             }
 
+        }catch (Exception ex){
+            t.sendResponseHeaders(INTERNAL_SERVER_ERROR, NO_RESPONSE_LENGTH);
 
         }finally {
             t.close();
         }
 
     }
+
     /*
 
      final String responseBody = "['hello world!']";

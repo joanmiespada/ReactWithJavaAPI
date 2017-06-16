@@ -16,6 +16,7 @@ public class Dictionary {
             ctx.Open();
         }catch (Exception ex)
         {
+            System.out.println("ERROR in DB: " +ex.getMessage());
             System.exit(-1);
         }
     }

@@ -1,12 +1,10 @@
 package com.Schibsted.api.Controllers;
 
-import com.Schibsted.Business.Dictionaries.IUsers;
-import com.sun.net.httpserver.Headers;
+import com.Schibsted.Business.Dictionaries.*;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -34,17 +32,17 @@ public class LoginController extends Controller implements HttpHandler {
         this.ProcessRequest(t);
     }
 
-    protected ResultContext GetRequest(final Map<String, List<String>> params)
+    protected ResultContext GetRequest(final Map<String, List<String>> params,String uri)
     {
         String user = params.get(USER).get(0);
         String pwd  = params.get(PASS).get(0);
-        ResultContext res = new ResultContext(200, "login: "+ user + " pwd: " + pwd);
+        ResultContext res = new ResultContext(ApiDefinitions.STATUS_OK, "login: "+ user + " pwd: " + pwd);
 
         return res;
     }
 
-    protected ResultContext PostRequest(final String payload)
+    protected ResultContext PostRequest(final String payload,String uri)
     {
-       return new ResultContext(200,"ok: " + payload);
+       return new ResultContext(ApiDefinitions.STATUS_OK,"ok: " + payload);
     }
 }

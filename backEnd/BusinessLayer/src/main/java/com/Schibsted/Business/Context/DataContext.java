@@ -18,7 +18,7 @@ public class DataContext implements IDataContext {
     {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:database.db");
         } catch ( Exception e ) {
             //System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             throw e; // new Exception(e);

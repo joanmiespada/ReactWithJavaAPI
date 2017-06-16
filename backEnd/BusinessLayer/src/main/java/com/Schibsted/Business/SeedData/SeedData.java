@@ -2,6 +2,7 @@ package com.Schibsted.Business.SeedData;
 
 import com.Schibsted.Business.Context.DataContext;
 import com.Schibsted.Business.Context.IDataContext;
+import com.Schibsted.Business.Securities.Roles;
 import com.Schibsted.Business.Utils.CipherHelper;
 import lombok.NonNull;
 
@@ -51,11 +52,11 @@ public class SeedData {
 
         stmt = this.ctx.getConnection().createStatement();
 
-        String  sql = "INSERT INTO USER VALUES (1, 'Jhon',    '"+ CipherHelper.Encript("123456")+ "','admin')";stmt.executeUpdate(sql);
-        sql = "INSERT INTO USER VALUES (2, 'Michael', '"+ CipherHelper.Encript("123456")+ "','page1')";stmt.executeUpdate(sql);
-        sql = "INSERT INTO USER VALUES (3, 'Sword',   '"+ CipherHelper.Encript("123456")+ "','page2')";stmt.executeUpdate(sql);
-        sql = "INSERT INTO USER VALUES (4, 'Black',   '"+ CipherHelper.Encript("123456")+ "','page3')";stmt.executeUpdate(sql);
-        sql = "INSERT INTO USER VALUES (5, 'Ruben',   '"+ CipherHelper.Encript("123456")+ "','page1,page2')";stmt.executeUpdate(sql);
+        String  sql = "INSERT INTO USER VALUES (1, 'Jhon',    '"+ CipherHelper.Encript("123456")+ "','"+ Roles.ADMIN+"')";stmt.executeUpdate(sql);
+        sql = "INSERT INTO USER VALUES (2, 'Michael', '"+ CipherHelper.Encript("123456")+ "','"+  Roles.PAGE1 +"')";stmt.executeUpdate(sql);
+        sql = "INSERT INTO USER VALUES (3, 'Sword',   '"+ CipherHelper.Encript("123456")+ "','"+ Roles.PAGE2 +"')";stmt.executeUpdate(sql);
+        sql = "INSERT INTO USER VALUES (4, 'Black',   '"+ CipherHelper.Encript("123456")+ "','"+ Roles.PAGE3 +"')";stmt.executeUpdate(sql);
+        sql = "INSERT INTO USER VALUES (5, 'Ruben',   '"+ CipherHelper.Encript("123456")+ "','"+ Roles.PAGE1+","+ Roles.PAGE3+ "')";stmt.executeUpdate(sql);
 
         stmt.close();
     }
