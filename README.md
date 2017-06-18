@@ -1,12 +1,12 @@
 
-#ReactWithJavaAPI Project
+## ReactWithJavaAPI Project
 
 The objective of the project is show a whole example of full-stack app using the next stack:
 
 Front-end: React with Redux. You'll be able find it on dir ./frontEnd
 Back-end: Java API without Frameworks such as Spring, Hibernate,... Directory: ./backendEnd
 
-#Backend
+## Backend
 
 The Back-end has been splited in two projectes:
 1) BusinessLayer: It contains all functional requirements. Business has been implemented with some libraries as Lombok Project.
@@ -14,10 +14,10 @@ The Back-end has been splited in two projectes:
 
 Both projects have been compiled with Gradle for dependencies and IntelliJ. Perhaps some dependencies would need to be updated with the correct paths. 
 
-#Frontend
+## Frontend
 
 
-#BBDD & SeedData
+## BBDD & SeedData
 
 The data is stored in a SqLite DB file. Everytime the API starts the DB is recreated from scratch.
 The seed data is here:
@@ -29,12 +29,12 @@ ID  USER     PWD      ROLES
 4, 'Black', "123456" PAGE3
 5, 'Ruben', "123456" PAGE1+PAGE3
 
-#Startup
+## Startup
 
 Front-end: you can go to frontEnd folder and run: npm install && npm start. You can see the website on http://localhost:3000
 Back-end: you can go to Backend folder and run: java -jar ./api/out/artifacts/api_jar/api.jar. Anyway I recommend open this folder with IntelliJ and Run the project by Main class. 
 
-#TDD
+## TDD
 
 You can find jUnit test on BusinessLayer.
 
