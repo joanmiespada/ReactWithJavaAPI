@@ -50,7 +50,9 @@ public abstract class Controller {
             final String requestMethod = t.getRequestMethod().toUpperCase();
             ResultContext result;
 
+
             //headers.set(HEADER_CONTENT_TYPE, CHARSET.toString());
+            headers.set(CORS_HEADER ,CORS_HEADER_VALUE);
             switch (requestMethod) {
                 case ApiDefinitions.METHOD_GET:
                     final Map<String, List<String>> requestParameters = ApiDefinitions.getRequestParameters(t.getRequestURI());

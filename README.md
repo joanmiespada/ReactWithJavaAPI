@@ -17,5 +17,33 @@ Both projects have been compiled with Gradle for dependencies and IntelliJ. Perh
 #Frontend
 
 
+#BBDD & SeedData
+
+The data is stored in a SqLite DB file. Everytime the API starts the DB is recreated from scratch.
+The seed data is here:
+
+ID  USER     PWD      ROLES
+1, 'Jhon',  "123456" ADMIN
+2, 'Michael,"123456" PAGE1
+3, 'Sword', "123456" PAGE2
+4, 'Black', "123456" PAGE3
+5, 'Ruben', "123456" PAGE1+PAGE3
+
+#Startup
+
+Front-end: you can go to frontEnd folder and run: npm install && npm start. You can see the website on http://localhost:3000
+Back-end: you can go to Backend folder and run: java -jar ./api/out/artifacts/api_jar/api.jar. Anyway I recommend open this folder with IntelliJ and Run the project by Main class. 
+
+#TDD
+
+You can find jUnit test on BusinessLayer.
+
+ 
+
+
+
+
+
+
 
 

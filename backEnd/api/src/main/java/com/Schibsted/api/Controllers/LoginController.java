@@ -44,7 +44,10 @@ public class LoginController extends Controller implements HttpHandler {
         String pwd  = params.get(PASS).get(0);
 
         User us = this.userManager.FindByNameAndPassword(user,pwd);
-        ResultContext res = new ResultContext(ApiDefinitions.STATUS_OK, us.getRoles() );
+
+        ResultContext res = new ResultContext(ApiDefinitions.STATUS_OK,
+                String.format("{\"id\":%d,\"roles\":\"%s\"}", us.getId(), us.getRoles()  )
+                 );
 
         return res;
     }

@@ -10,4 +10,6 @@ public class User  extends Model{
 
     @Getter @Setter private String Name;
     @Getter @Setter private String Roles;
+
+
 }

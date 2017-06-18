@@ -35,6 +35,9 @@ public final class ApiDefinitions {
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "POST";
     public static final String METHOD_OPTIONS = "OPTIONS";
+    public static final String CORS_HEADER= "Access-Control-Allow-Origin";
+    public static final String CORS_HEADER_VALUE= "*";
+
     public static final String ALLOWED_METHODS = METHOD_GET + "," + METHOD_POST + "," + METHOD_OPTIONS;
 
     public static Map<String, List<String>> getRequestParameters(final URI requestUri) {
